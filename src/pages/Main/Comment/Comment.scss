@@ -1,0 +1,15 @@
+.feed-comment-card {
+  display: flex;
+  gap: 8px;
+  line-height: 24px;
+
+  .highlight {
+    font-weight: bold;
+  }
+
+  .time {
+    color: grey;
+    margin-top: 30px;
+    margin-left: -160px;
+  }
+}
