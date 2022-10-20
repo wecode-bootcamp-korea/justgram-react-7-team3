@@ -16,7 +16,6 @@ function Main() {
       id: id,
       content: value.current.value,
     };
-    test;
 
     setCommentArray([...commentArray, newComment]);
   };
