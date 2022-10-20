@@ -16,8 +16,10 @@ function Main() {
       id: id,
       content: value.current.value,
     };
+    console.log(newComment);
 
     setCommentArray([...commentArray, newComment]);
+    value.current.value = "";
   };
 
   return (
@@ -146,16 +148,16 @@ function Main() {
                   <span className="highlight">nesecious</span>
                   <span>반짝반짝</span>
                   <br />
-                  {commentArray.map((comment) => {
-                    return (
-                      <div className="feed-comment-card" key={comment.id}>
-                        <span className="highlight">cannon_mj</span>
-                        <span>{comment.content}</span>
-                      </div>
-                    );
-                  })}
-                  <span className="time">42분 전</span>
                 </div>
+                {commentArray.map((comment) => {
+                  return (
+                    <div className="feed-comment-card" key={comment.id}>
+                      <span className="highlight">cannon_mj</span>
+                      <span>{comment.content}</span>
+                    </div>
+                  );
+                })}
+                <span className="time">42분 전</span>
               </div>
               <div className="feed-comment-input-wrapper">
                 <input
@@ -257,14 +259,6 @@ function Main() {
                   <span className="highlight">nesecious</span>
                   <span>반짝반짝</span>
                   <br />
-                  {commentArray.map((comment) => {
-                    return (
-                      <div className="feed-comment-card" key={comment.id}>
-                        <span className="highlight">cannon_mj</span>
-                        <span>{comment.content}</span>
-                      </div>
-                    );
-                  })}
                   <span className="time">30분 전</span>
                 </div>
               </div>
@@ -272,7 +266,6 @@ function Main() {
                 <input
                   className="feed-comment-input"
                   placeholder="댓글 달기..."
-                  ref={value}
                 />
                 <button
                   className="feed-comment-input-button"
@@ -368,14 +361,6 @@ function Main() {
                   <span className="highlight">nesecious</span>
                   <span>반짝반짝</span>
                   <br />
-                  {commentArray.map((comment) => {
-                    return (
-                      <div className="feed-comment-card" key={comment.id}>
-                        <span className="highlight">cannon_mj</span>
-                        <span>{comment.content}</span>
-                      </div>
-                    );
-                  })}
                   <span className="time">42분 전</span>
                 </div>
               </div>
@@ -383,13 +368,13 @@ function Main() {
                 <input
                   className="feed-comment-input"
                   placeholder="댓글 달기..."
-                  ref={value}
                 />
                 <button
                   className="feed-comment-input-button"
                   onClick={addComment}
+                >
                   게시
-                ></button>
+                </button>
               </div>
             </div>
           </div>
