@@ -12,6 +12,23 @@ export const Feed = (props) => {
     comment.length > 0 ? setDisable(false) : setDisable(true);
   }, [comment]);
 
+  useEffect(()=>{
+     fetch('http://localhost:3000/data/comment.json')
+    .then(res=>res.json())
+    .then(data=>{
+      console.log(data);
+      setId((prev) => prev + 1);
+      data.forEach((EachComment)=>{
+        const newComment={
+          id: id,
+          content: EachComment.comment,
+        }
+        setCommentArr([...commentArray, newComment]);
+  })
+
+});
+  },[]);
+
   const addComment = (e) => {
     setId((prev) => prev + 1);
     const newComment = {
@@ -26,7 +43,7 @@ export const Feed = (props) => {
     const newArr = commentArray.filter((comment) => comment.id !== commentId);
     setCommentArr(newArr);
   };
-  
+
   return (
     <div className="feed">
       <div className="f-header">
@@ -44,7 +61,7 @@ export const Feed = (props) => {
         <img className="i-bookmark" alt="bookMark" src="/images/bookmark.png" />
       </div>
       <div className="f-like">
-        <img className="c-profile" src="/images/jaemin.jpg" />
+        <img className="c-profile" alt="commen_profile" src="/images/jaemin.jpg" />
         <span>
           <b>na.jaemin0813</b>님 <b>여러 명</b>이 좋아합니다.
         </span>
@@ -59,7 +76,7 @@ export const Feed = (props) => {
         <div className="comment">
           {commentArray.map((comment) => (
             <Comment
-            key={comment.id}
+              key={comment.id}
               writer={props.writer}
               comment={comment}
               onDelete={() => deleteComment(comment.id)}

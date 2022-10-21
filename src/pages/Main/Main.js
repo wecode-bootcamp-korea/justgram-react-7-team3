@@ -1,4 +1,3 @@
-//import React, { useState, useEffect, useRef } from 'react';
 import './Main.scss';
 import {Header,Feed} from '../../Components';
 function Main() {
