@@ -24,7 +24,9 @@ function Login() {
 
   //로그인 버튼을 눌렀을 시 메인으로 이동
   const goToMain = () => {
-    return navigate("/main");
+    if (idValue.includes("@") && pwValue.length >= 5) {
+      return navigate("/main");
+    }
   };
 
   return (

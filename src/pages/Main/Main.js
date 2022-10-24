@@ -3,6 +3,14 @@ import styles from "./Main.scss";
 import Feed from "./Feed/Feed";
 
 function Main() {
+  const [feedArray, setFeedArray] = useState([]);
+
+  useEffect(() => {
+    fetch("/data/feedsData.json")
+      .then((res) => res.json())
+      .then((res) => setFeedArray(res.data));
+  }, []);
+
   return (
     <div className="out-wrapper">
       {/* 헤더 */}
@@ -44,11 +52,14 @@ function Main() {
       {/* 피드 */}
       <div className="content-wrapper">
         <div className="feed-list">
-          <Feed />
-          <br />
-          <Feed />
-          <br />
-          <Feed />
+          {feedArray.map((feed) => (
+            <Feed
+              key={feed.id}
+              accountName={feed.accountName}
+              likenum={feed.likenum}
+              picture={feed.picture}
+            />
+          ))}
         </div>
       </div>
     </div>

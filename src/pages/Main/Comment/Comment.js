@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "./Comment.scss";
 
-function Comment({ content }) {
+function Comment({ content, writer }) {
   return (
     <div className="feed-comment-card">
-      <span className="highlight">min.young</span>
+      <span className="highlight">{writer}</span>
       <span>{content}</span>
     </div>
   );
