@@ -86,7 +86,7 @@ function Feed({ accountName, likenum, picture }) {
       </div>
       <div className="feed-comment-wrapper">
         <div className="feed-comment-list">
-          <div className="feed-comment-card">
+          {/* <div className="feed-comment-card">
             <span className="highlight">cannon_mj</span>
             <span>아름다운 달...</span>
           </div>
@@ -94,7 +94,7 @@ function Feed({ accountName, likenum, picture }) {
             <span className="highlight">nesecious</span>
             <span>반짝반짝</span>
             <br />
-          </div>
+          </div> */}
           {commentArray.map((comment) => {
             return (
               <Comment
