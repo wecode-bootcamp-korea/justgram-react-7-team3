@@ -4,11 +4,30 @@ import Feed from "./Feed/Feed";
 
 function Main() {
   const [feedArray, setFeedArray] = useState([]);
+  const [userEmail, setUserEmail] = useState([]);
 
   useEffect(() => {
     fetch("/data/feedsData.json")
       .then((res) => res.json())
       .then((res) => setFeedArray(res.data));
+  }, []);
+
+  useEffect(() => {
+    //1. 토큰 가져오기
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (!token) {
+      alert("유저가 아닙니다!");
+      return;
+    }
+    fetch("http://localhost:8000/users/me", {
+      method: "GET",
+      headers: {
+        token: token,
+      },
+    })
+      .then((response) => response.json())
+      .then((result) => setUserEmail(result.email));
   }, []);
 
   return (
@@ -42,11 +61,16 @@ function Main() {
             src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/heart.png"
             alt=""
           />
-          <img
-            className="menu-icon"
-            src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/profile.png"
-            alt=""
-          />
+          {/* userEmail이 있다면 이메일을 보여주고, 아니라면 아이콘을 보여줌 */}
+          {userEmail ? (
+            <div>{userEmail}</div>
+          ) : (
+            <img
+              className="menu-icon"
+              src="https://s3.ap-northeast-2.amazonaws.com/cdn.wecode.co.kr/bearu/profile.png"
+              alt=""
+            />
+          )}
         </div>
       </header>
       {/* 피드 */}
