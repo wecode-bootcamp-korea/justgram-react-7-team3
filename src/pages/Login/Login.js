@@ -1,19 +1,30 @@
 import './Login.scss';
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const navigate = useNavigate();
   const [id, setId] = useState('');
   const [password, setPw] = useState('');
   const [disable, setDisable] = useState(true);
-  const goMain = () => {
-    navigate('/main');
-  }
 
   useEffect(() => {
     id.includes('@') && (password.length >= 5) ? setDisable(false) : setDisable(true);
   }, [id, password])
+
+  
+  const handleLogin = () => {
+    fetch("http://localhost:8000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: id,
+        password: password,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => localStorage.setItem("token", result.token));
+  };
 
   return (
     <div id="box">
@@ -29,7 +40,7 @@ function Login() {
         <input onChange={(e) => setPw(e.target.value)} className="writeArea" type="password" placeholder="비밀번호" />
         <br />
 
-        <button onClick={goMain} type="button" className="submit" disabled={disable}>
+        <button onClick={handleLogin} type="button" className="submit" disabled={disable}>
           로그인
         </button>
 
