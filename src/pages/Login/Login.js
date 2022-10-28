@@ -12,7 +12,7 @@ function Login() {
 
   
   const handleLogin = () => {
-    fetch("http://localhost:8000/users/login", {
+    fetch("http://localhost:3000/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
